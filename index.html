@@ -4,34 +4,95 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Apartamentos Zona Leste — Leads via WhatsApp</title>
-  <meta name="description" content="Empreendimentos na Zona Leste: metragens, lazer, valores e condições. Fale no WhatsApp e receba todas as ofertas e plantas." />
+  <meta name="description" content="Empreendimentos na Zona Leste: metragens, lazer, preços e condições. Fale no WhatsApp e receba plantas e simulações." />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Apartamentos Zona Leste — Leads via WhatsApp" />
+  <meta property="og:description" content="Empreendimentos na Zona Leste: metragens, lazer, preços e condições. Fale no WhatsApp e receba plantas e simulações." />
+  <!-- Preencha com a URL final da página -->
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="website" />
+  <!-- Usa a primeira imagem da página como preview -->
+  <meta property="og:image" content="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1400&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Apartamentos Zona Leste — Leads via WhatsApp" />
+  <meta name="twitter:description" content="Empreendimentos na Zona Leste: metragens, lazer, preços e condições. Fale no WhatsApp e receba plantas e simulações." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1400&auto=format&fit=crop" />
+
+  <!-- JSON-LD: Real Estate Agent / Business -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Consultoria Imobiliária — Zona Leste",
+    "telephone": "+5511913595391",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "São Paulo",
+      "addressRegion": "SP",
+      "addressCountry": "BR"
+    },
+    "legalName": "Consultoria Imobiliária — Zona Leste",
+    "description": "Atendimento via WhatsApp. Ofertas de lançamentos e imóveis na Zona Leste de São Paulo.",
+    "memberOf": {
+      "@type": "Organization",
+      "name": "CRECI: 313454-F"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;          /* slate-900 */
-      --card: #111827;        /* gray-900 */
-      --text: #e5e7eb;        /* gray-200 */
-      --muted: #9ca3af;       /* gray-400 */
-      --accent: #22c55e;      /* green-500 */
-      --accent-2: #34d399;    /* green-400 */
-      --border: #1f2937;      /* gray-800 */
-      --pill: #1e293b;        /* slate-800 */
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --accent-2: #34d399;
+      --border: #1f2937;
+      --pill: #1e293b;
+      --focus: 3px;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       background: radial-gradient(1200px 900px at 10% -10%, #0b1220 10%, transparent 60%),
                   radial-gradient(1000px 700px at 120% 0%, #0b1220 10%, transparent 60%),
                   var(--bg);
       color: var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
     .container {
       max-width: 1160px;
       margin: 0 auto;
       padding: 24px;
     }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      left: 16px;
+      top: 16px;
+      width: auto;
+      height: auto;
+      padding: 8px 12px;
+      background: #fff;
+      color: #052e16;
+      border-radius: 6px;
+      z-index: 1000;
+    }
+
     header {
       display: flex; align-items: center; justify-content: space-between;
       gap: 16px; padding: 12px 0 20px;
@@ -43,6 +104,7 @@
       width: 40px; height: 40px; border-radius: 10px;
       background: linear-gradient(135deg, #22c55e 0%, #0ea5e9 100%);
       box-shadow: 0 8px 30px rgba(34,197,94,.3);
+      flex: 0 0 40px;
     }
     .brand h1 {
       font-size: 18px; margin: 0; font-weight: 700; letter-spacing: .2px;
@@ -51,24 +113,27 @@
       font-size: 12px; color: var(--muted);
     }
     .hero {
-      background: linear-gradient(180deg, rgba(52,211,153,.08), transparent 60%);
+      background: linear-gradient(180deg, rgba(52,211,153,.06), transparent 60%);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 20px;
+      margin-top: 6px;
     }
     .hero h2 {
       margin: 0 0 10px; font-size: 22px; font-weight: 800;
     }
     .hero p { margin: 0; color: var(--muted); }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2.2cm; /* espaçamento amplo entre cards */
+      gap: 28px;
       margin-top: 28px;
     }
     @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; gap: 28px; }
+      .grid { grid-template-columns: 1fr; gap: 20px; }
     }
+
     .card {
       background: rgba(17,24,39,.85);
       border: 1px solid var(--border);
@@ -76,6 +141,7 @@
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,.25);
       display: flex; flex-direction: column;
+      min-height: 100%;
     }
     .badge {
       position: absolute; top: 14px; left: 14px;
@@ -90,6 +156,7 @@
     .media img {
       width: 100%; height: 100%; object-fit: cover;
       filter: saturate(1.05) contrast(1.05);
+      display: block;
     }
     .content { padding: 16px; display: grid; gap: 10px; }
     .title {
@@ -122,238 +189,364 @@
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
       color: #052e16; font-weight: 800; border: 0; padding: 12px 16px;
       border-radius: 12px; text-decoration: none; box-shadow: 0 8px 22px rgba(34,197,94,.35);
+      transition: transform .12s ease, filter .12s ease;
     }
-    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn:hover, .btn:focus {
+      filter: brightness(1.05);
+      transform: translateY(-2px);
+    }
+    .btn:focus {
+      outline: none;
+      box-shadow: 0 0 0 var(--focus) rgba(52,211,153,0.12), 0 0 0 2px rgba(52,211,153,0.06);
+      border-radius: 12px;
+    }
     .btn.secondary {
       background: transparent; color: var(--text); border: 1px solid var(--border);
       box-shadow: none; font-weight: 600;
     }
+    a[role="button"] { cursor: pointer; }
     footer { margin: 36px 0 12px; color: var(--muted); font-size: 12px; text-align: center; }
+
+    /* Improve focus visibility for keyboard users */
+    :focus:not(:focus-visible) { outline: none; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
+
+  <div class="container" role="document">
     <header>
       <div class="brand">
-        <div class="brand-logo"></div>
+        <div class="brand-logo" aria-hidden="true"></div>
         <div>
           <h1>Consultoria Imobiliária — Zona Leste</h1>
-          <div class="creci">Atendimento via WhatsApp | CRECI: SEU-CRECI-AQUI</div>
+          <div class="creci">Atendimento via WhatsApp | CRECI: 313454-F</div>
         </div>
       </div>
-      <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20receber%20as%20opções%20da%20Zona%20Leste%20e%20plantas.">
+      <a
+        class="btn"
+        href="https://wa.me/5511913595391?text=Quero%20receber%20as%20op%C3%A7%C3%B5es%20da%20Zona%20Leste%20e%20plantas."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir WhatsApp para receber opções da Zona Leste (11) 91359-5391">
         WhatsApp agora
       </a>
     </header>
 
-    <section class="hero">
-      <h2>Seleção de Lançamentos e Oportunidades na Zona Leste</h2>
-      <p>Confira tipologias, metragens, lazer, preços e condições. Falo com você no WhatsApp e envio plantas e simulações.</p>
-    </section>
+    <main id="main-content" role="main" aria-labelledby="hero-title">
+      <section class="hero" aria-labelledby="hero-title">
+        <h2 id="hero-title">Seleção de Lançamentos e Oportunidades na Zona Leste</h2>
+        <p>Confira tipologias, metragens, lazer, preços e condições. Falo com você no WhatsApp e envio plantas e simulações.</p>
+      </section>
 
-    <section class="grid">
+      <section class="grid" aria-label="Lista de empreendimentos">
+        <!-- Card Template: cada imagem usa srcset/sizes para melhor responsividade -->
 
-      <!-- Vista Penha -->
-      <article class="card">
-        <div class="media">
-          <span class="badge">Lançamento • Jan/2025</span>
-          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1400&auto=format&fit=crop" alt="Vista Penha" />
-        </div>
-        <div class="content">
-          <div class="title">Vista Penha</div>
-          <div class="subtitle">Penha • Próx. Metrô Penha | MCMV</div>
-
-          <div class="chips">
-            <span class="chip">1 e 2 dorms</span>
-            <span class="chip">37–42 m²</span>
-            <span class="chip">Lazer: piscina, Playground, academia</span>
+        <!-- Vista Penha -->
+        <article class="card" aria-labelledby="title-vista-penha">
+          <div class="media">
+            <span class="badge">Lançamento • Jan/2025</span>
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=800&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=400&auto=format&fit=crop 400w,
+                https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=800&auto=format&fit=crop 800w,
+                https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop 1200w,
+                https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop 1600w
+              "
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt="Fachada e área de lazer do empreendimento Vista Penha — lançamento em Jan/2025"
+            />
           </div>
+          <div class="content">
+            <div id="title-vista-penha" class="title">Vista Penha</div>
+            <div class="subtitle">Penha • Próx. Metrô Penha | MCMV</div>
 
-          <div class="rows">
-            <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
-            <div class="row"><span class="label">Endereço:</span><span class="value">Penha, São Paulo — confirmar nº</span></div>
-            <div class="row"><span class="label">Entrega:</span><span class="value">Prev. 2025</span></div>
-            <div class="row"><span class="label">Tipologias:</span><span class="value">1 e 2 dorms • 37–42 m²</span></div>
-            <div class="row"><span class="label">Amenidades:</span><span class="value">Piscina, Playground, Academia</span></div>
-            <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 330.000</span></div>
-            <div class="row"><span class="label">Condições:</span><span class="value">Entrada flexível • MCMV • Doc. a confirmar</span></div>
+            <div class="chips">
+              <span class="chip">1 e 2 dorms</span>
+              <span class="chip">37–42 m²</span>
+              <span class="chip">Lazer: piscina, Playground, academia</span>
+            </div>
+
+            <div class="rows">
+              <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
+              <div class="row"><span class="label">Endereço:</span><span class="value">Penha, São Paulo — confirmar nº</span></div>
+              <div class="row"><span class="label">Entrega:</span><span class="value">Prev. 2025</span></div>
+              <div class="row"><span class="label">Tipologias:</span><span class="value">1 e 2 dorms • 37–42 m²</span></div>
+              <div class="row"><span class="label">Amenidades:</span><span class="value">Piscina, Playground, Academia</span></div>
+              <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 330.000</span></div>
+              <div class="row"><span class="label">Condições:</span><span class="value">Entrada flexível • MCMV • Doc. a confirmar</span></div>
+            </div>
+
+            <div class="cta">
+              <a
+                class="btn"
+                href="https://wa.me/5511913595391?text=Quero%20saber%20mais%20sobre%20o%20Vista%20Penha."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar no WhatsApp sobre Vista Penha (11) 91359-5391">
+                Falar no WhatsApp
+              </a>
+              <a class="btn secondary" href="#plantas-vista-penha" aria-label="Ver plantas do Vista Penha">Ver plantas</a>
+            </div>
           </div>
+        </article>
 
-          <div class="cta">
-            <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20saber%20mais%20sobre%20o%20Vista%20Penha.">Falar no WhatsApp</a>
-            <a class="btn secondary" href="#plantas-vista-penha">Ver plantas</a>
+        <!-- Connect Penha -->
+        <article class="card" aria-labelledby="title-connect-penha">
+          <div class="media">
+            <span class="badge">Em obras/Lançamento</span>
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=800&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=400&auto=format&fit=crop 400w,
+                https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=800&auto=format&fit=crop 800w,
+                https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt="Perspectiva do empreendimento Connect Penha — em obras"
+            />
           </div>
-        </div>
-      </article>
+          <div class="content">
+            <div id="title-connect-penha" class="title">Connect Penha</div>
+            <div class="subtitle">Penha • Próx. Metrô Penha</div>
 
-      <!-- Connect Penha -->
-      <article class="card">
-        <div class="media">
-          <span class="badge">Em obras/Lançamento</span>
-          <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1400&auto=format&fit=crop" alt="Connect Penha" />
-        </div>
-        <div class="content">
-          <div class="title">Connect Penha</div>
-          <div class="subtitle">Penha • Próx. Metrô Penha</div>
+            <div class="chips">
+              <span class="chip">2 dorms</span>
+              <span class="chip">Metragens: confirmar</span>
+              <span class="chip">Lazer: confirmar</span>
+            </div>
 
-          <div class="chips">
-            <span class="chip">2 dorms</span>
-            <span class="chip">Metragens: confirmar</span>
-            <span class="chip">Lazer: confirmar</span>
+            <div class="rows">
+              <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
+              <div class="row"><span class="label">Endereço:</span><span class="value">Penha, São Paulo — confirmar nº</span></div>
+              <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Tipologias:</span><span class="value">2 dorms • metragem a confirmar</span></div>
+              <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 476.000</span></div>
+              <div class="row"><span class="label">Condições:</span><span class="value">Entrada flexível • Fluxo a combinar</span></div>
+            </div>
+
+            <div class="cta">
+              <a
+                class="btn"
+                href="https://wa.me/5511913595391?text=Quero%20saber%20mais%20sobre%20o%20Connect%20Penha."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar no WhatsApp sobre Connect Penha (11) 91359-5391">
+                Falar no WhatsApp
+              </a>
+              <a class="btn secondary" href="#plantas-connect-penha">Ver plantas</a>
+            </div>
           </div>
+        </article>
 
-          <div class="rows">
-            <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
-            <div class="row"><span class="label">Endereço:</span><span class="value">Penha, São Paulo — confirmar nº</span></div>
-            <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Tipologias:</span><span class="value">2 dorms • metragem a confirmar</span></div>
-            <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 476.000</span></div>
-            <div class="row"><span class="label">Condições:</span><span class="value">Entrada flexível • Fluxo a combinar</span></div>
+        <!-- Parque Creta -->
+        <article class="card" aria-labelledby="title-parque-creta">
+          <div class="media">
+            <span class="badge">MCMV</span>
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=800&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=400&auto=format&fit=crop 400w,
+                https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=800&auto=format&fit=crop 800w,
+                https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt="Imagem ilustrativa do Parque Creta — MCMV"
+            />
           </div>
+          <div class="content">
+            <div id="title-parque-creta" class="title">Parque Creta</div>
+            <div class="subtitle">Localização a confirmar • Próx. transporte</div>
 
-          <div class="cta">
-            <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20saber%20mais%20sobre%20o%20Connect%20Penha.">Falar no WhatsApp</a>
-            <a class="btn secondary" href="#plantas-connect-penha">Ver plantas</a>
+            <div class="chips">
+              <span class="chip">1 e 2 dorms</span>
+              <span class="chip">Metragens: confirmar</span>
+              <span class="chip">Lazer: confirmar</span>
+            </div>
+
+            <div class="rows">
+              <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
+              <div class="row"><span class="label">Endereço:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Tipologias:</span><span class="value">1 e 2 dorms • metragem a confirmar</span></div>
+              <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 210.000</span></div>
+              <div class="row"><span class="label">Condições:</span><span class="value">Entrada R$ 5.000 • MCMV</span></div>
+            </div>
+
+            <div class="cta">
+              <a
+                class="btn"
+                href="https://wa.me/5511913595391?text=Quero%20saber%20mais%20sobre%20o%20Parque%20Creta."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar no WhatsApp sobre Parque Creta (11) 91359-5391">
+                Falar no WhatsApp
+              </a>
+              <a class="btn secondary" href="#plantas-parque-creta">Ver plantas</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Parque Creta -->
-      <article class="card">
-        <div class="media">
-          <span class="badge">MCMV</span>
-          <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=1400&auto-format&fit=crop" alt="Parque Creta" />
-        </div>
-        <div class="content">
-          <div class="title">Parque Creta</div>
-          <div class="subtitle">Localização a confirmar • Próx. transporte</div>
-
-          <div class="chips">
-            <span class="chip">1 e 2 dorms</span>
-            <span class="chip">Metragens: confirmar</span>
-            <span class="chip">Lazer: confirmar</span>
+        <!-- Neo Estilo Vila Ré -->
+        <article class="card" aria-labelledby="title-neo-estilo">
+          <div class="media">
+            <span class="badge">Próx. Metrô Patriarca</span>
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1493247035880-efdf53f2cf9c?q=80&w=800&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1493247035880-efdf53f2cf9c?q=80&w=400&auto=format&fit=crop 400w,
+                https://images.unsplash.com/photo-1493247035880-efdf53f2cf9c?q=80&w=800&auto=format&fit=crop 800w,
+                https://images.unsplash.com/photo-1493247035880-efdf53f2cf9c?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt="Fachada do Neo Estilo Vila Ré — próximo ao Metrô Patriarca"
+            />
           </div>
+          <div class="content">
+            <div id="title-neo-estilo" class="title">Neo Estilo Vila Ré</div>
+            <div class="subtitle">Vila Ré • Patriarca</div>
 
-          <div class="rows">
-            <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
-            <div class="row"><span class="label">Endereço:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Tipologias:</span><span class="value">1 e 2 dorms • metragem a confirmar</span></div>
-            <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 210.000</span></div>
-            <div class="row"><span class="label">Condições:</span><span class="value">Entrada R$ 5.000 • MCMV</span></div>
+            <div class="chips">
+              <span class="chip">2 dorms</span>
+              <span class="chip">Metragens: confirmar</span>
+              <span class="chip">Lazer: confirmar</span>
+            </div>
+
+            <div class="rows">
+              <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
+              <div class="row"><span class="label">Endereço:</span><span class="value">Próx. Metrô Patriarca</span></div>
+              <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Tipologias:</span><span class="value">2 dorms • metragem a confirmar</span></div>
+              <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 310.000</span></div>
+              <div class="row"><span class="label">Condições:</span><span class="value">Entrada R$ 5.000 • MCMV provável</span></div>
+            </div>
+
+            <div class="cta">
+              <a
+                class="btn"
+                href="https://wa.me/5511913595391?text=Quero%20saber%20mais%20sobre%20o%20Neo%20Estilo%20Vila%20R%C3%A9."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar no WhatsApp sobre Neo Estilo Vila Ré (11) 91359-5391">
+                Falar no WhatsApp
+              </a>
+              <a class="btn secondary" href="#plantas-neo-estilo">Ver plantas</a>
+            </div>
           </div>
+        </article>
 
-          <div class="cta">
-            <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20saber%20mais%20sobre%20o%20Parque%20Creta.">Falar no WhatsApp</a>
-            <a class="btn secondary" href="#plantas-parque-creta">Ver plantas</a>
+        <!-- Mood Vila Matilde -->
+        <article class="card" aria-labelledby="title-mood">
+          <div class="media">
+            <span class="badge">Próx. Metrô Vila Matilde</span>
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=400&auto=format&fit=crop 400w,
+                https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=800&auto=format&fit=crop 800w,
+                https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt="Ambiente interno ilustrativo do Mood Vila Matilde"
+            />
           </div>
-        </div>
-      </article>
+          <div class="content">
+            <div id="title-mood" class="title">Mood Vila Matilde</div>
+            <div class="subtitle">Vila Matilde • Zona Leste</div>
 
-      <!-- Neo Estilo Vila Ré -->
-      <article class="card">
-        <div class="media">
-          <span class="badge">Próx. Metrô Patriarca</span>
-          <img src="https://images.unsplash.com/photo-1493247035880-efdf53f2cf9c?q=80&w=1400&auto=format&fit=crop" alt="Neo Estilo Vila Ré" />
-        </div>
-        <div class="content">
-          <div class="title">Neo Estilo Vila Ré</div>
-          <div class="subtitle">Vila Ré • Patriarca</div>
+            <div class="chips">
+              <span class="chip">1 e 2 dorms</span>
+              <span class="chip">Metragens: confirmar</span>
+              <span class="chip">Lazer: confirmar</span>
+            </div>
 
-          <div class="chips">
-            <span class="chip">2 dorms</span>
-            <span class="chip">Metragens: confirmar</span>
-            <span class="chip">Lazer: confirmar</span>
+            <div class="rows">
+              <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
+              <div class="row"><span class="label">Endereço:</span><span class="value">Próx. Metrô Vila Matilde</span></div>
+              <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Tipologias:</span><span class="value">1 e 2 dorms • metragem a confirmar</span></div>
+              <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 225.000</span></div>
+              <div class="row"><span class="label">Condições:</span><span class="value">Entrada R$ 5.000 • MCMV provável</span></div>
+            </div>
+
+            <div class="cta">
+              <a
+                class="btn"
+                href="https://wa.me/5511913595391?text=Quero%20saber%20mais%20sobre%20o%20Mood%20Vila%20Matilde."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar no WhatsApp sobre Mood Vila Matilde (11) 91359-5391">
+                Falar no WhatsApp
+              </a>
+              <a class="btn secondary" href="#plantas-mood">Ver plantas</a>
+            </div>
           </div>
+        </article>
 
-          <div class="rows">
-            <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
-            <div class="row"><span class="label">Endereço:</span><span class="value">Próx. Metrô Patriarca</span></div>
-            <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Tipologias:</span><span class="value">2 dorms • metragem a confirmar</span></div>
-            <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 310.000</span></div>
-            <div class="row"><span class="label">Condições:</span><span class="value">Entrada R$ 5.000 • MCMV provável</span></div>
+        <!-- Aura Guilhermina -->
+        <article class="card" aria-labelledby="title-aura">
+          <div class="media">
+            <span class="badge">Próx. Metrô Guilhermina-Esperança</span>
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=400&auto=format&fit=crop 400w,
+                https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800&auto=format&fit=crop 800w,
+                https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt="Perspectiva do Aura Guilhermina — próximo ao metrô Guilhermina-Esperança"
+            />
           </div>
+          <div class="content">
+            <div id="title-aura" class="title">Aura Guilhermina</div>
+            <div class="subtitle">Guilhermina-Esperança • Zona Leste</div>
 
-          <div class="cta">
-            <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20saber%20mais%20sobre%20o%20Neo%20Estilo%20Vila%20R%C3%A9.">Falar no WhatsApp</a>
-            <a class="btn secondary" href="#plantas-neo-estilo">Ver plantas</a>
+            <div class="chips">
+              <span class="chip">2 dorms</span>
+              <span class="chip">Metragens: confirmar</span>
+              <span class="chip">Amenidades: confirmar</span>
+            </div>
+
+            <div class="rows">
+              <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
+              <div class="row"><span class="label">Endereço:</span><span class="value">Próx. Metrô Guilhermina-Esperança</span></div>
+              <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Tipologias:</span><span class="value">2 dorms • metragem a confirmar</span></div>
+              <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
+              <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 386.000</span></div>
+              <div class="row"><span class="label">Condições:</span><span class="value">Fluxo a combinar</span></div>
+            </div>
+
+            <div class="cta">
+              <a
+                class="btn"
+                href="https://wa.me/5511913595391?text=Quero%20saber%20mais%20sobre%20o%20Aura%20Guilhermina."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Falar no WhatsApp sobre Aura Guilhermina (11) 91359-5391">
+                Falar no WhatsApp
+              </a>
+              <a class="btn secondary" href="#plantas-aura">Ver plantas</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Mood Vila Matilde -->
-      <article class="card">
-        <div class="media">
-          <span class="badge">Próx. Metrô Vila Matilde</span>
-          <img src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=1400&auto=format&fit=crop" alt="Mood Vila Matilde" />
-        </div>
-        <div class="content">
-          <div class="title">Mood Vila Matilde</div>
-          <div class="subtitle">Vila Matilde • Zona Leste</div>
+      </section>
+    </main>
 
-          <div class="chips">
-            <span class="chip">1 e 2 dorms</span>
-            <span class="chip">Metragens: confirmar</span>
-            <span class="chip">Lazer: confirmar</span>
-          </div>
-
-          <div class="rows">
-            <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
-            <div class="row"><span class="label">Endereço:</span><span class="value">Próx. Metrô Vila Matilde</span></div>
-            <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Tipologias:</span><span class="value">1 e 2 dorms • metragem a confirmar</span></div>
-            <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 225.000</span></div>
-            <div class="row"><span class="label">Condições:</span><span class="value">Entrada R$ 5.000 • MCMV provável</span></div>
-          </div>
-
-          <div class="cta">
-            <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20saber%20mais%20sobre%20o%20Mood%20Vila%20Matilde.">Falar no WhatsApp</a>
-            <a class="btn secondary" href="#plantas-mood">Ver plantas</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Aura Guilhermina -->
-      <article class="card">
-        <div class="media">
-          <span class="badge">Próx. Metrô Guilhermina-Esperança</span>
-          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1400&auto=format&fit=crop" alt="Aura Guilhermina" />
-        </div>
-        <div class="content">
-          <div class="title">Aura Guilhermina</div>
-          <div class="subtitle">Guilhermina-Esperança • Zona Leste</div>
-
-          <div class="chips">
-            <span class="chip">2 dorms</span>
-            <span class="chip">Metragens: confirmar</span>
-            <span class="chip">Amenidades: confirmar</span>
-          </div>
-
-          <div class="rows">
-            <div class="row"><span class="label">Construtora:</span><span class="value">Confirmar oficial</span></div>
-            <div class="row"><span class="label">Endereço:</span><span class="value">Próx. Metrô Guilhermina-Esperança</span></div>
-            <div class="row"><span class="label">Entrega:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Tipologias:</span><span class="value">2 dorms • metragem a confirmar</span></div>
-            <div class="row"><span class="label">Amenidades:</span><span class="value">A confirmar</span></div>
-            <div class="row"><span class="label">Preço a partir:</span><span class="price">R$ 386.000</span></div>
-            <div class="row"><span class="label">Condições:</span><span class="value">Fluxo a combinar</span></div>
-          </div>
-
-          <div class="cta">
-            <a class="btn" href="https://wa.me/55SEUWHATSAPP?text=Quero%20saber%20mais%20sobre%20o%20Aura%20Guilhermina.">Falar no WhatsApp</a>
-            <a class="btn secondary" href="#plantas-aura">Ver plantas</a>
-          </div>
-        </div>
-      </article>
-
-    </section>
-
-    <footer>
+    <footer role="contentinfo">
       Imagens ilustrativas. Valores e condições sujeitos a alteração sem aviso prévio. Consulte disponibilidade.
     </footer>
   </div>
