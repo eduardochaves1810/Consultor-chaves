@@ -7,15 +7,18 @@
   <meta name="description" content="Imóveis na Zona Leste de São Paulo com condições especiais. Fale no WhatsApp, veja preços, tipologias e simule financiamento.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0f172a; --card:#111827; --muted:#94a3b8; --text:#e5e7eb;
       --accent:#22c55e; --accent-700:#15803d; --chip:#1f2937; --chip-on:#16a34a; --brand:#10b981;
+      --stroke: rgba(255,255,255,0.08);
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,Segoe UI,Roboto,Arial,sans-serif}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
+
     header{
       position:sticky;top:0;z-index:20;
       background:linear-gradient(180deg, rgba(15,23,42,0.95), rgba(15,23,42,0.8) 60%, rgba(15,23,42,0));
@@ -31,46 +34,75 @@
     .brand .info{line-height:1.1}
     .brand .title{font-weight:800;font-size:16px}
     .brand .sub{font-size:12px;color:var(--muted)}
+
     .hero{padding:18px 16px 8px}
     .hero h1{margin:8px 0 10px;font-size:22px;line-height:1.15}
     .hero p{margin:0;color:var(--muted);font-size:14px}
     .cta-bar{display:flex;gap:10px;margin-top:14px}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
+      padding:12px 14px;border-radius:10px;border:1px solid var(--stroke);
       background:linear-gradient(180deg,#16a34a,#15803d);color:white;font-weight:700;flex:1
     }
     .btn.secondary{background:#0b1220;border-color:#1f2937;color:var(--text)}
+    .btn.small{padding:8px 10px;font-size:13px;font-weight:600}
     .whatsapp-icon{width:18px;height:18px;border-radius:100%;background:#25D366;display:inline-block}
-    .filters{padding:14px 16px 6px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(2,6,23,0.3)}
+
+    .section-divider{border-top:1px solid rgba(255,255,255,0.06);}
+
+    .filters{
+      padding:14px 16px 6px;border-top:1px solid rgba(255,255,255,0.06);
+      border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(2,6,23,0.3)
+    }
     .chips{display:flex;flex-wrap:wrap;gap:8px}
     .chip{padding:8px 12px;border-radius:999px;background:var(--chip);color:#cbd5e1;font-size:13px;border:1px solid rgba(255,255,255,0.06);cursor:pointer}
     .chip.active{background:var(--chip-on);color:#052e16;font-weight:700;border-color:transparent}
     .price-filter{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .price-filter input{background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:8px 10px;color:#e5e7eb;width:120px}
-    .wrap{padding:14px 16px}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px}
-    @media(min-width:720px){ .grid{grid-template-columns:1fr 1fr} }
-    @media(min-width:1080px){ .grid{grid-template-columns:1fr 1fr 1fr} }
-    .card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden}
-    .card-img{position:relative;height:180px;background:#0b1220}
+    .price-filter select{background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:8px 10px;color:#e5e7eb;}
+
+    /* Grid e espaçamentos */
+    .wrap{padding: 2cm;} /* padding lateral e vertical de 2cm no container */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 2cm; /* espaçamento vertical no mobile */
+    }
+    @media (min-width: 640px){
+      .grid{
+        grid-template-columns: 1fr 1fr; /* duplas */
+        column-gap: 2cm;  /* espaçamento horizontal */
+        row-gap: 2cm;     /* espaçamento vertical */
+      }
+    }
+
+    .card{
+      background:var(--card);border:1px solid var(--stroke);border-radius:16px;overflow:hidden
+    }
+    .card-img{position:relative;height:200px;background:#0b1220}
     .badge{
       position:absolute;left:10px;top:10px;background:rgba(2,6,23,0.8);backdrop-filter: blur(6px);
-      border:1px solid rgba(255,255,255,0.08);color:#cbd5e1;padding:6px 10px;border-radius:999px;font-size:12px
+      border:1px solid var(--stroke);color:#cbd5e1;padding:6px 10px;border-radius:999px;font-size:12px
     }
-    .card-body{padding:12px}
-    .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .card-title{font-size:16px;font-weight:800}
-    .loc{color:var(--muted);font-size:13px;margin-top:2px}
+    .card-body{padding:14px}
+    .title-row{display:flex;align-items:start;justify-content:space-between;gap:10px}
+    .card-title{font-size:18px;font-weight:800}
+    .loc{color:var(--muted);font-size:13px;margin-top:4px}
     .pill{margin-top:8px;display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:#0b1220;border:1px solid #1f2937;color:#cbd5e1;font-size:12px}
     .price{margin-top:10px;font-size:15px}
     .price strong{font-size:18px;color:#eafff2}
     .benefits{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
     .benefits span{background:#0b1220;border:1px solid #1f2937;color:#cbd5e1;border-radius:8px;padding:6px 8px;font-size:12px}
-    .cta{margin-top:12px;display:flex;gap:8px}
+
+    /* Blocos adicionais de informação */
+    .info-list{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .info-item{background:#0b1220;border:1px solid #1f2937;border-radius:10px;padding:8px 10px;font-size:12px;color:#cbd5e1}
+    .highlight{color:#a7f3d0}
+
+    .cta{margin-top:14px;display:flex;gap:8px}
     .cta .btn{padding:10px 12px;font-size:14px}
     .cta .btn.ghost{background:transparent;border-color:#1f2937;color:#cbd5e1}
     .small{font-size:12px;color:var(--muted);margin-top:8px}
+
     footer{padding:30px 16px;color:#94a3b8;text-align:center;border-top:1px solid rgba(255,255,255,0.06);margin-top:10px}
   </style>
 </head>
@@ -98,7 +130,7 @@
     </div>
   </section>
 
-  <section class="filters" id="filtros">
+  <section class="filters section-divider" id="filtros">
     <div class="chips" id="bairroChips">
       <div class="chip active" data-bairro="todos">Todos</div>
       <div class="chip" data-bairro="Penha">Penha</div>
@@ -108,7 +140,7 @@
     </div>
     <div class="price-filter">
       <span style="color:var(--muted);font-size:13px">Faixa de preço:</span>
-      <select id="priceSelect" style="background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:8px 10px;color:#e5e7eb;">
+      <select id="priceSelect">
         <option value="todas">Todas</option>
         <option value="0-250">Até R$ 250 mil</option>
         <option value="250-350">R$ 250–350 mil</option>
@@ -135,15 +167,25 @@
             </div>
             <div class="pill">1 e 2 dorms</div>
           </div>
+
           <div class="price">A partir de <strong>R$ 330.000</strong></div>
-          <div class="benefits">
-            <span>Entrada facilitada</span><span>Use FGTS</span><span>Vagas</span><span>Lazer completo</span>
+
+          <div class="info-list">
+            <div class="info-item">Status: <span class="highlight">Lançamento</span></div>
+            <div class="info-item">Metrô: <span class="highlight">Penha</span></div>
+            <div class="info-item">Área priv.: 35–45 m²</div>
+            <div class="info-item">Vagas: opções</div>
           </div>
+
+          <div class="benefits">
+            <span>Entrada facilitada</span><span>Use FGTS</span><span>Lazer completo</span><span>Portaria</span>
+          </div>
+
           <div class="cta">
-            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Vista Penha. Podemos falar?">
+            <a class="btn small" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Vista Penha. Podemos falar?">
               <span class="whatsapp-icon"></span> WhatsApp
             </a>
-            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+            <a class="btn small ghost" href="#" target="_blank">Tour/Plantas</a>
           </div>
           <div class="small">Imagens ilustrativas. Consulte disponibilidade.</div>
         </div>
@@ -163,15 +205,25 @@
             </div>
             <div class="pill">2 dorms</div>
           </div>
+
           <div class="price">A partir de <strong>R$ 476.000</strong></div>
-          <div class="benefits">
-            <span>Área de lazer</span><span>Portaria 24h</span><span>Opção c/ vaga</span>
+
+          <div class="info-list">
+            <div class="info-item">Status: <span class="highlight">Pronto/Obra</span></div>
+            <div class="info-item">Metrô: <span class="highlight">Penha</span></div>
+            <div class="info-item">Área priv.: 45–55 m²</div>
+            <div class="info-item">Vagas: opções</div>
           </div>
+
+          <div class="benefits">
+            <span>Lazer completo</span><span>Portaria 24h</span><span>Acabamento superior</span>
+          </div>
+
           <div class="cta">
-            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Connect Penha. Podemos falar?">
+            <a class="btn small" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Connect Penha. Podemos falar?">
               <span class="whatsapp-icon"></span> WhatsApp
             </a>
-            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+            <a class="btn small ghost" href="#" target="_blank">Tour/Plantas</a>
           </div>
           <div class="small">Valores sujeitos a alteração sem aviso prévio.</div>
         </div>
@@ -191,15 +243,25 @@
             </div>
             <div class="pill">1 e 2 dorms</div>
           </div>
+
           <div class="price">A partir de <strong>R$ 210.000</strong> • Entrada <strong>R$ 5.000</strong></div>
+
+          <div class="info-list">
+            <div class="info-item">Status: <span class="highlight">MCMV</span></div>
+            <div class="info-item">Metrô: <span class="highlight">Penha (raio de atendimento)</span></div>
+            <div class="info-item">Área priv.: 32–45 m²</div>
+            <div class="info-item">Condições: FGTS e subsídio</div>
+          </div>
+
           <div class="benefits">
             <span>Use FGTS</span><span>Subsídio MCMV</span><span>Plantas funcionais</span>
           </div>
+
           <div class="cta">
-            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Parque Creta. Podemos falar?">
+            <a class="btn small" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Parque Creta. Podemos falar?">
               <span class="whatsapp-icon"></span> WhatsApp
             </a>
-            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+            <a class="btn small ghost" href="#" target="_blank">Tour/Plantas</a>
           </div>
           <div class="small">Entrada reduzida mediante aprovação de crédito.</div>
         </div>
@@ -219,15 +281,25 @@
             </div>
             <div class="pill">2 dorms</div>
           </div>
+
           <div class="price">A partir de <strong>R$ 310.000</strong> • Entrada <strong>R$ 5.000</strong></div>
-          <div class="benefits">
-            <span>Use FGTS</span><span>Lazer para família</span><span>Condições MCMV</span>
+
+          <div class="info-list">
+            <div class="info-item">Status: <span class="highlight">MCMV</span></div>
+            <div class="info-item">Metrô: <span class="highlight">Patriarca</span></div>
+            <div class="info-item">Área priv.: 38–48 m²</div>
+            <div class="info-item">Condições: Use FGTS</div>
           </div>
+
+          <div class="benefits">
+            <span>Lazer família</span><span>Portaria</span><span>Opção com vaga</span>
+          </div>
+
           <div class="cta">
-            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Neo Estilo Vila Ré. Podemos falar?">
+            <a class="btn small" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Neo Estilo Vila Ré. Podemos falar?">
               <span class="whatsapp-icon"></span> WhatsApp
             </a>
-            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+            <a class="btn small ghost" href="#" target="_blank">Tour/Plantas</a>
           </div>
           <div class="small">Tipologias confirmadas: 2 dorms.</div>
         </div>
@@ -247,15 +319,25 @@
             </div>
             <div class="pill">1 e 2 dorms</div>
           </div>
+
           <div class="price">A partir de <strong>R$ 225.000</strong> • Entrada <strong>R$ 5.000</strong></div>
-          <div class="benefits">
-            <span>Subsídio MCMV</span><span>Use FGTS</span><span>Localização estratégica</span>
+
+          <div class="info-list">
+            <div class="info-item">Status: <span class="highlight">MCMV</span></div>
+            <div class="info-item">Metrô: <span class="highlight">Vila Matilde</span></div>
+            <div class="info-item">Área priv.: 30–42 m²</div>
+            <div class="info-item">Condições: FGTS/Subsídio</div>
           </div>
+
+          <div class="benefits">
+            <span>Localização estratégica</span><span>Plantas otimizadas</span><span>Condomínio econômico</span>
+          </div>
+
           <div class="cta">
-            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Mood Vila Matilde. Podemos falar?">
+            <a class="btn small" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Mood Vila Matilde. Podemos falar?">
               <span class="whatsapp-icon"></span> WhatsApp
             </a>
-            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+            <a class="btn small ghost" href="#" target="_blank">Tour/Plantas</a>
           </div>
           <div class="small">Valores promocionais para captação de leads.</div>
         </div>
@@ -275,15 +357,25 @@
             </div>
             <div class="pill">2 dorms</div>
           </div>
+
           <div class="price">A partir de <strong>R$ 386.000</strong> • Entrada <strong>R$ 10.000</strong></div>
-          <div class="benefits">
-            <span>Lazer completo</span><span>Acabamento superior</span><span>Opções com vaga</span>
+
+          <div class="info-list">
+            <div class="info-item">Status: <span class="highlight">Médio padrão</span></div>
+            <div class="info-item">Metrô: <span class="highlight">Guilhermina-Esperança</span></div>
+            <div class="info-item">Área priv.: 45–60 m²</div>
+            <div class="info-item">Vagas: opções</div>
           </div>
+
+          <div class="benefits">
+            <span>Acabamento superior</span><span>Lazer completo</span><span>Portaria 24h</span>
+          </div>
+
           <div class="cta">
-            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Aura Guilhermina. Podemos falar?">
+            <a class="btn small" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Aura Guilhermina. Podemos falar?">
               <span class="whatsapp-icon"></span> WhatsApp
             </a>
-            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+            <a class="btn small ghost" href="#" target="_blank">Tour/Plantas</a>
           </div>
           <div class="small">Disponibilidade por torre e tipologia.</div>
         </div>
@@ -316,11 +408,10 @@
       if(msg) btn.href = makeWhatsUrl(msg);
     });
 
-    // Filtro por bairro (chips) e por preço (select)
+    // Filtros
     const chips = document.querySelectorAll('.chip');
     const cards = document.querySelectorAll('.card');
     const priceSel = document.getElementById('priceSelect');
-
     let activeBairro = 'todos';
 
     chips.forEach(chip=>{
