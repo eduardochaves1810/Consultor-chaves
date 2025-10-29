@@ -1,484 +1,362 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Apartamentos na Zona Leste de SP | MCMV • Médio • Alto Padrão</title>
-  <meta name="description" content="Apartamentos na Zona Leste de SP — Minha Casa Minha Vida, médio e alto padrão. Use FGTS, simule financiamento e fale com o Consultor Chaves no WhatsApp. Tatuapé, Mooca, Anália Franco, Itaquera e mais." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>Apartamentos Zona Leste • Consulte valores e simule o seu financiamento</title>
+  <meta name="description" content="Imóveis na Zona Leste de São Paulo com condições especiais. Fale no WhatsApp, veja preços, tipologias e simule financiamento.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #222;
-      --muted: #666;
-      --primary: #0ea5e9;
-      --primary-dark: #0284c7;
-      --accent: #16a34a;
-      --border: #e5e7eb;
-      --card: #f8fafc;
-      --whatsapp: #25D366;
-      --danger: #ef4444;
-      --price: #0b7a0b;
+    :root{
+      --bg:#0f172a; --card:#111827; --muted:#94a3b8; --text:#e5e7eb;
+      --accent:#22c55e; --accent-700:#15803d; --chip:#1f2937; --chip-on:#16a34a; --brand:#10b981;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.5;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Inter",system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    header{
+      position:sticky;top:0;z-index:20;
+      background:linear-gradient(180deg, rgba(15,23,42,0.95), rgba(15,23,42,0.8) 60%, rgba(15,23,42,0));
+      backdrop-filter: blur(6px);
+      padding:12px 16px 8px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
     }
-    a { color: inherit; text-decoration: none; }
-    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
-
-    header {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(255,255,255,0.9); backdrop-filter: saturate(180%) blur(6px);
-      border-bottom: 1px solid var(--border);
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#34d399,#22c55e,#16a34a);
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:#052e16;letter-spacing:0.3px
     }
-    .nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 0;
+    .brand .info{line-height:1.1}
+    .brand .title{font-weight:800;font-size:16px}
+    .brand .sub{font-size:12px;color:var(--muted)}
+    .hero{padding:18px 16px 8px}
+    .hero h1{margin:8px 0 10px;font-size:22px;line-height:1.15}
+    .hero p{margin:0;color:var(--muted);font-size:14px}
+    .cta-bar{display:flex;gap:10px;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg,#16a34a,#15803d);color:white;font-weight:700;flex:1
     }
-    .brand { font-weight: 700; }
-    .brand small { color: var(--muted); font-weight: 600; display:block; font-size:12px; }
-    .nav-actions { display: flex; gap: 8px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 10px 14px; border-radius: 10px; font-weight: 700; border: 1px solid transparent;
-      transition: transform .05s ease, background .2s ease, border-color .2s ease;
-      cursor: pointer;
+    .btn.secondary{background:#0b1220;border-color:#1f2937;color:var(--text)}
+    .whatsapp-icon{width:18px;height:18px;border-radius:100%;background:#25D366;display:inline-block}
+    .filters{padding:14px 16px 6px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(2,6,23,0.3)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:8px 12px;border-radius:999px;background:var(--chip);color:#cbd5e1;font-size:13px;border:1px solid rgba(255,255,255,0.06);cursor:pointer}
+    .chip.active{background:var(--chip-on);color:#052e16;font-weight:700;border-color:transparent}
+    .price-filter{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .price-filter input{background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:8px 10px;color:#e5e7eb;width:120px}
+    .wrap{padding:14px 16px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:720px){ .grid{grid-template-columns:1fr 1fr} }
+    @media(min-width:1080px){ .grid{grid-template-columns:1fr 1fr 1fr} }
+    .card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden}
+    .card-img{position:relative;height:180px;background:#0b1220}
+    .badge{
+      position:absolute;left:10px;top:10px;background:rgba(2,6,23,0.8);backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,0.08);color:#cbd5e1;padding:6px 10px;border-radius:999px;font-size:12px
     }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-dark); }
-    .btn-outline { border-color: var(--border); background: #fff; color: var(--text); }
-    .btn-outline:hover { border-color: var(--primary); }
-
-    .hero {
-      padding: 28px 0 8px;
-      background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 70%);
-      border-bottom: 1px solid var(--border);
-    }
-    .hero h1 { font-size: 28px; line-height: 1.2; margin: 8px 0 6px; }
-    .hero p.sub { color: var(--muted); margin: 0 0 14px; }
-    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
-    .badge {
-      background: var(--card); border: 1px solid var(--border); border-radius: 999px;
-      padding: 6px 10px; font-size: 13px; color: #111;
-    }
-
-    .filters {
-      padding: 10px 0 18px; position: sticky; top: 56px; z-index: 40;
-      background: #fff; border-bottom: 1px solid var(--border);
-    }
-    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip {
-      font-size: 14px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border);
-      background: #fff; cursor: pointer; color: #111;
-    }
-    .chip.active { background: #ebf8ff; border-color: #bae6fd; color: #0c4a6e; }
-
-    .section { padding: 24px 0; }
-    .section h2 { font-size: 22px; margin: 0 0 12px; }
-    .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
-    @media(min-width: 700px){ .cards { grid-template-columns: 1fr 1fr; } }
-    @media(min-width: 1024px){ .cards { grid-template-columns: 1fr 1fr 1fr; } }
-
-    .card {
-      border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff;
-      display: flex; flex-direction: column;
-    }
-    .carousel { position: relative; aspect-ratio: 16/10; background: #f1f5f9; }
-    .carousel img { width: 100%; height: 100%; object-fit: cover; display: none; }
-    .carousel img.active { display: block; }
-    .carousel .nav {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 6px;
-    }
-    .carousel .nav button {
-      background: rgba(0,0,0,0.45); color:#fff; border: 0;
-      width: 34px; height: 34px; border-radius: 999px; cursor: pointer;
-    }
-    .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-    .badge-row { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag { font-size: 12px; background: #f1f5f9; color: #0f172a; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border); }
-    .pill { font-size: 12px; background: #ecfdf5; color: #065f46; padding: 4px 8px; border-radius: 999px; border: 1px solid #d1fae5; }
-    .price { font-weight: 700; color: var(--price); }
-    .bullets { margin: 0; padding-left: 18px; color: #0b172a; }
-    .cta-row { display: flex; gap: 8px; margin-top: auto; }
-    .btn-wa { background: var(--whatsapp); color: #fff; border: 0; }
-    .btn-wa:hover { filter: brightness(0.95); }
-
-    .muted { color: var(--muted); }
-    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media(min-width: 900px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
-    .card-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
-    details { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: #fff; }
-    details + details { margin-top: 10px; }
-    summary { cursor: pointer; font-weight: 600; }
-    form .row { display: grid; grid-template-columns: 1fr; gap: 10px; }
-    @media(min-width: 700px){ form .row { grid-template-columns: 1fr 1fr; } }
-    label { font-size: 14px; color: #111; }
-    input, select, textarea {
-      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px;
-    }
-    .hint { font-size: 12px; color: var(--muted); }
-
-    footer { margin-top: 16px; border-top: 1px solid var(--border); background: #fff; }
-    .footer-inner { padding: 14px 0; display: grid; gap: 10px; }
-    .creci { color: var(--muted); font-size: 14px; }
-    .float-wa {
-      position: fixed; right: 14px; bottom: 14px; z-index: 60;
-      display: flex; align-items: center; gap: 8px;
-      background: var(--whatsapp); color: #fff; padding: 10px 12px; border-radius: 999px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.16);
-    }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    .ribbon {
-      position: absolute; top: 10px; left: -8px; background: #0ea5e9; color:#fff; padding: 6px 10px; font-weight:700;
-      clip-path: polygon(0 0, 100% 0, 88% 100%, 0% 100%);
-      font-size: 12px;
-    }
+    .card-body{padding:12px}
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .card-title{font-size:16px;font-weight:800}
+    .loc{color:var(--muted);font-size:13px;margin-top:2px}
+    .pill{margin-top:8px;display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:#0b1220;border:1px solid #1f2937;color:#cbd5e1;font-size:12px}
+    .price{margin-top:10px;font-size:15px}
+    .price strong{font-size:18px;color:#eafff2}
+    .benefits{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+    .benefits span{background:#0b1220;border:1px solid #1f2937;color:#cbd5e1;border-radius:8px;padding:6px 8px;font-size:12px}
+    .cta{margin-top:12px;display:flex;gap:8px}
+    .cta .btn{padding:10px 12px;font-size:14px}
+    .cta .btn.ghost{background:transparent;border-color:#1f2937;color:#cbd5e1}
+    .small{font-size:12px;color:var(--muted);margin-top:8px}
+    footer{padding:30px 16px;color:#94a3b8;text-align:center;border-top:1px solid rgba(255,255,255,0.06);margin-top:10px}
   </style>
 </head>
 <body>
 
   <header>
-    <div class="container nav">
-      <div class="brand">
-        Zona Leste Imóveis
-        <small>Consultor Chaves • CRECI 313454-F</small>
-      </div>
-      <div class="nav-actions">
-        <a class="btn btn-outline" href="#empreendimentos">Empreendimentos</a>
-        <a class="btn btn-primary" id="btnTopWhats" target="_blank" rel="noopener">
-          Falar no WhatsApp
-        </a>
+    <div class="brand">
+      <div class="logo">ZL</div>
+      <div class="info">
+        <div class="title">Imóveis Zona Leste • SP</div>
+        <div class="sub">Consultor imobiliário • CRECI 313454-F</div>
       </div>
     </div>
   </header>
 
   <section class="hero">
-    <div class="container">
-      <h1>Apartamentos na Zona Leste — opções a partir de R$ 239.000</h1>
-      <p class="sub">1, 2 e 3 dormitórios • MCMV, médio e alto padrão • Use FGTS • Atendimento imediato no WhatsApp.</p>
-      <div class="badges">
-        <span class="badge">Perto do metrô</span>
-        <span class="badge">Condomínio clube</span>
-        <span class="badge">Minha Casa Minha Vida</span>
-        <span class="badge">Entrada facilitada</span>
-        <span class="badge">Tour do decorado</span>
-      </div>
-      <div class="nav-actions">
-        <a class="btn btn-primary" id="btnHeroWhats" target="_blank" rel="noopener">Falar no WhatsApp agora</a>
-        <a class="btn btn-outline" href="#form-contato">Prefere que eu te chame?</a>
-      </div>
+    <h1>Encontre seu apê na Zona Leste com condições reais e atendimento rápido no WhatsApp</h1>
+    <p>Valores a partir de R$ 210 mil • Entrada facilitada • Próximo ao metrô • MCMV e médio padrão</p>
+    <div class="cta-bar">
+      <a id="whats-hero" class="btn" href="#" target="_blank" rel="noopener">
+        <span class="whatsapp-icon"></span>
+        Falar no WhatsApp agora
+      </a>
+      <a href="#lista" class="btn secondary">Ver opções</a>
     </div>
   </section>
 
-  <div class="filters">
-    <div class="container">
-      <div class="filter-group" id="filterChips">
-        <button class="chip active" data-filter="all">Todos</button>
-        <button class="chip" data-filter="mcmv">Minha Casa Minha Vida</button>
-        <button class="chip" data-filter="mid">Médio Padrão</button>
-        <button class="chip" data-filter="high">Alto Padrão</button>
-        <button class="chip" data-filter="perto-metro">Perto do metrô</button>
-        <button class="chip" data-filter="pronto">Pronto para morar</button>
-        <button class="chip" data-filter="em-obras">Em obras/Lanç.</button>
-        <button class="chip" data-filter="varanda">Com varanda</button>
-      </div>
+  <section class="filters" id="filtros">
+    <div class="chips" id="bairroChips">
+      <div class="chip active" data-bairro="todos">Todos</div>
+      <div class="chip" data-bairro="Penha">Penha</div>
+      <div class="chip" data-bairro="Vila Ré">Vila Ré</div>
+      <div class="chip" data-bairro="Vila Matilde">Vila Matilde</div>
+      <div class="chip" data-bairro="Guilhermina">Guilhermina</div>
     </div>
-  </div>
-
-  <section class="section" id="empreendimentos">
-    <div class="container">
-      <h2>Empreendimentos em destaque</h2>
-      <div class="cards" id="cardsGrid">
-
-        <!-- CARD MAIS BARATO (MCMV) -->
-        <article class="card" data-seg="mcmv perto-metro em-obras varanda">
-          <div class="carousel" data-index="0">
-            <span class="ribbon">A partir de R$ 239.000</span>
-            <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c52f?q=80&w=1200&auto=format&fit=crop" alt="Fachada MCMV" class="active">
-            <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop" alt="Lazer MCMV">
-            <img src="https://images.unsplash.com/photo-1501045661006-fcebe0257c3f0?q=80&w=1200&auto=format&fit=crop" alt="Planta 2 dorms MCMV">
-            <div class="nav">
-              <button class="prev" aria-label="Imagem anterior">‹</button>
-              <button class="next" aria-label="Próxima imagem">›</button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="badge-row">
-              <span class="tag">Lançamento</span>
-              <span class="pill">MCMV</span>
-              <span class="tag">600 m do Metrô</span>
-            </div>
-            <h3 style="margin:6px 0 0;">Residencial LesteViva — Itaquera</h3>
-            <p class="muted" style="margin:0;">2 dorms (1 suíte) • 43 a 55 m² • Varanda • 1 vaga</p>
-            <p class="price">A partir de R$ 239.000</p>
-            <ul class="bullets">
-              <li>Use FGTS + condições facilitadas</li>
-              <li>Condomínio clube com lazer completo</li>
-              <li>Perto de mercados, escolas e terminal</li>
-            </ul>
-            <div class="cta-row">
-              <a class="btn btn-wa" target="_blank" rel="noopener"
-                 href="#" data-wa="mcmv_lesviv_itaquera">
-                Ver opções no WhatsApp
-              </a>
-              <a class="btn btn-outline" href="#form-contato">Receber book</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- MÉDIO PADRÃO -->
-        <article class="card" data-seg="mid pronto varanda perto-metro">
-          <div class="carousel" data-index="0">
-            <span class="ribbon">A partir de R$ 489.000</span>
-            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop" alt="Sala e varanda">
-            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop" alt="Cozinha planejada" class="active">
-            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200&auto=format&fit=crop" alt="Área comum">
-            <div class="nav">
-              <button class="prev" aria-label="Imagem anterior">‹</button>
-              <button class="next" aria-label="Próxima imagem">›</button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="badge-row">
-              <span class="tag">Pronto para morar</span>
-              <span class="pill">Médio Padrão</span>
-              <span class="tag">900 m do Metrô</span>
-            </div>
-            <h3 style="margin:6px 0 0;">Parque Tatuapé Home — Tatuapé</h3>
-            <p class="muted" style="margin:0;">2 e 3 dorms • 55 a 78 m² • Varanda gourmet • 1–2 vagas</p>
-            <p class="price">A partir de R$ 489.000</p>
-            <ul class="bullets">
-              <li>Área de lazer completa e coworking</li>
-              <li>Região com shoppings e serviços</li>
-              <li>Financiamento facilitado</li>
-            </ul>
-            <div class="cta-row">
-              <a class="btn btn-wa" target="_blank" rel="noopener"
-                 href="#" data-wa="mid_pt_home_tatuape">
-                Falar sobre este imóvel
-              </a>
-              <a class="btn btn-outline" href="#form-contato">Agendar visita</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ALTO PADRÃO -->
-        <article class="card" data-seg="high pronto varanda">
-          <div class="carousel" data-index="0">
-            <span class="ribbon">A partir de R$ 1.690.000</span>
-            <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200&auto=format&fit=crop" alt="Fachada alto padrão" class="active">
-            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Área gourmet">
-            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Suíte master">
-            <div class="nav">
-              <button class="prev" aria-label="Imagem anterior">‹</button>
-              <button class="next" aria-label="Próxima imagem">›</button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="badge-row">
-              <span class="tag">Pronto para morar</span>
-              <span class="pill">Alto Padrão</span>
-              <span class="tag">Anália Franco</span>
-            </div>
-            <h3 style="margin:6px 0 0;">Signature Anália — Anália Franco</h3>
-            <p class="muted" style="margin:0;">3 e 4 suítes • 135 a 220 m² • Varanda ampla • 3 vagas</p>
-            <p class="price">A partir de R$ 1.690.000</p>
-            <ul class="bullets">
-              <li>Acabamentos premium e hall privativo</li>
-              <li>Lazer adulto/infantil e segurança 24h</li>
-              <li>Perto do Shopping Anália Franco</li>
-            </ul>
-            <div class="cta-row">
-              <a class="btn btn-wa" target="_blank" rel="noopener"
-                 href="#" data-wa="high_signature_analia">
-                Quero condições no WhatsApp
-              </a>
-              <a class="btn btn-outline" href="#form-contato">Receber book completo</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Duplicar articles para mais empreendimentos, atualizando preços "A partir de R$ ..." com valores reais -->
-
-      </div>
+    <div class="price-filter">
+      <span style="color:var(--muted);font-size:13px">Faixa de preço:</span>
+      <select id="priceSelect" style="background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:8px 10px;color:#e5e7eb;">
+        <option value="todas">Todas</option>
+        <option value="0-250">Até R$ 250 mil</option>
+        <option value="250-350">R$ 250–350 mil</option>
+        <option value="350-500">R$ 350–500 mil</option>
+        <option value="500-inf">Acima de R$ 500 mil</option>
+      </select>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container grid-2">
-      <div class="card-box">
-        <h3>Por que a Zona Leste?</h3>
-        <p class="muted">Mobilidade por metrô, Radial Leste e Aricanduva, polos de comércio e serviços (Tatuapé, Mooca, Anália Franco), escolas e hospitais — opções do MCMV ao alto padrão.</p>
-        <ul class="bullets">
-          <li>Perto do metrô e corredores de ônibus</li>
-          <li>Condomínios com lazer completo</li>
-          <li>Empreendimentos prontos e em obras</li>
-          <li>Uso de FGTS e entrada facilitada</li>
-        </ul>
-      </div>
-      <div class="card-box">
-        <h3>Resultados e confiança</h3>
-        <p class="muted">+120 famílias atendidas na Zona Leste • Atendimento consultivo e suporte na aprovação de crédito.</p>
-        <div class="badge-row">
-          <span class="pill">Atendimento imediato</span>
-          <span class="pill">Tour do decorado</span>
-          <span class="pill">Simulação em minutos</span>
+  <main class="wrap" id="lista">
+    <div class="grid" id="cards">
+
+      <!-- Vista Penha -->
+      <article class="card" data-bairro="Penha" data-price="330000">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Vista Penha - fachada" />
+          <div class="badge">Lançamento • Jan/2025 • MCMV</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>Dúvidas frequentes</h2>
-      <details open>
-        <summary>Posso usar FGTS e Minha Casa Minha Vida?</summary>
-        <p>Sim. Avaliamos sua faixa e simulamos condições pelo WhatsApp em poucos minutos.</p>
-      </details>
-      <details>
-        <summary>Financia 100%? E se meu score for baixo?</summary>
-        <p>Depende da análise. Fazemos pré-avaliação e indicamos caminhos para aprovação.</p>
-      </details>
-      <details>
-        <summary>Dá para agendar visita ao decorado?</summary>
-        <p>Sim! Clique em “Falar no WhatsApp” e combinamos seu melhor horário.</p>
-      </details>
-    </div>
-  </section>
-
-  <section class="section" id="form-contato">
-    <div class="container card-box">
-      <h2>Prefere que eu te chame no WhatsApp?</h2>
-      <p class="muted">Preencha e retorno em minutos.</p>
-      <form id="leadForm" onsubmit="return handleForm(event)">
-        <div class="row">
-          <div>
-            <label>Nome
-              <input type="text" name="nome" required placeholder="Seu nome" />
-            </label>
+        <div class="card-body">
+          <div class="title-row">
+            <div>
+              <div class="card-title">Vista Penha</div>
+              <div class="loc">Penha • Próx. Metrô Penha</div>
+            </div>
+            <div class="pill">1 e 2 dorms</div>
           </div>
-          <div>
-            <label>WhatsApp
-              <input type="tel" name="whats" required placeholder="(11) 9 9999-9999" />
-            </label>
+          <div class="price">A partir de <strong>R$ 330.000</strong></div>
+          <div class="benefits">
+            <span>Entrada facilitada</span><span>Use FGTS</span><span>Vagas</span><span>Lazer completo</span>
           </div>
-          <div>
-            <label>Interesse
-              <select name="interesse" required>
-                <option value="">Selecione…</option>
-                <option value="mcmv">Minha Casa Minha Vida</option>
-                <option value="mid">Médio Padrão</option>
-                <option value="high">Alto Padrão</option>
-              </select>
-            </label>
+          <div class="cta">
+            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Vista Penha. Podemos falar?">
+              <span class="whatsapp-icon"></span> WhatsApp
+            </a>
+            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
           </div>
-          <div>
-            <label>Bairro de interesse
-              <input type="text" name="bairro" placeholder="Tatuapé, Mooca, Itaquera, ..." />
-            </label>
-          </div>
+          <div class="small">Imagens ilustrativas. Consulte disponibilidade.</div>
         </div>
-        <p class="hint">
-          <input type="checkbox" id="lgpd" required />
-          <label for="lgpd">Autorizo contato via WhatsApp.</label>
-        </p>
-        <button class="btn btn-primary" type="submit">Enviar e falar no WhatsApp</button>
-      </form>
+      </article>
+
+      <!-- Connect Penha -->
+      <article class="card" data-bairro="Penha" data-price="476000">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=1200&auto=format&fit=crop" alt="Connect Penha - fachada" />
+          <div class="badge">Pronto/Em obras • Médio padrão</div>
+        </div>
+        <div class="card-body">
+          <div class="title-row">
+            <div>
+              <div class="card-title">Connect Penha</div>
+              <div class="loc">Penha • Próx. Metrô Penha</div>
+            </div>
+            <div class="pill">2 dorms</div>
+          </div>
+          <div class="price">A partir de <strong>R$ 476.000</strong></div>
+          <div class="benefits">
+            <span>Área de lazer</span><span>Portaria 24h</span><span>Opção c/ vaga</span>
+          </div>
+          <div class="cta">
+            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Connect Penha. Podemos falar?">
+              <span class="whatsapp-icon"></span> WhatsApp
+            </a>
+            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+          </div>
+          <div class="small">Valores sujeitos a alteração sem aviso prévio.</div>
+        </div>
+      </article>
+
+      <!-- Parque Creta -->
+      <article class="card" data-bairro="Penha" data-price="210000">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?q=80&w=1200&auto=format&fit=crop" alt="Parque Creta - fachada" />
+          <div class="badge">MCMV • Condições especiais</div>
+        </div>
+        <div class="card-body">
+          <div class="title-row">
+            <div>
+              <div class="card-title">Parque Creta</div>
+              <div class="loc">Penha • Próx. comércio e serviços</div>
+            </div>
+            <div class="pill">1 e 2 dorms</div>
+          </div>
+          <div class="price">A partir de <strong>R$ 210.000</strong> • Entrada <strong>R$ 5.000</strong></div>
+          <div class="benefits">
+            <span>Use FGTS</span><span>Subsídio MCMV</span><span>Plantas funcionais</span>
+          </div>
+          <div class="cta">
+            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Parque Creta. Podemos falar?">
+              <span class="whatsapp-icon"></span> WhatsApp
+            </a>
+            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+          </div>
+          <div class="small">Entrada reduzida mediante aprovação de crédito.</div>
+        </div>
+      </article>
+
+      <!-- Neo Estilo Vila Ré -->
+      <article class="card" data-bairro="Vila Ré" data-price="310000">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop" alt="Neo Estilo Vila Ré - fachada" />
+          <div class="badge">MCMV • Próx. Metrô Patriarca</div>
+        </div>
+        <div class="card-body">
+          <div class="title-row">
+            <div>
+              <div class="card-title">Neo Estilo Vila Ré</div>
+              <div class="loc">Vila Ré • Próx. Metrô Patriarca</div>
+            </div>
+            <div class="pill">2 dorms</div>
+          </div>
+          <div class="price">A partir de <strong>R$ 310.000</strong> • Entrada <strong>R$ 5.000</strong></div>
+          <div class="benefits">
+            <span>Use FGTS</span><span>Lazer para família</span><span>Condições MCMV</span>
+          </div>
+          <div class="cta">
+            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Neo Estilo Vila Ré. Podemos falar?">
+              <span class="whatsapp-icon"></span> WhatsApp
+            </a>
+            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+          </div>
+          <div class="small">Tipologias confirmadas: 2 dorms.</div>
+        </div>
+      </article>
+
+      <!-- Mood Vila Matilde -->
+      <article class="card" data-bairro="Vila Matilde" data-price="225000">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1200&auto=format&fit=crop" alt="Mood Vila Matilde - fachada" />
+          <div class="badge">MCMV • Próx. Metrô Vila Matilde</div>
+        </div>
+        <div class="card-body">
+          <div class="title-row">
+            <div>
+              <div class="card-title">Mood Vila Matilde</div>
+              <div class="loc">Vila Matilde • Próx. Metrô Vila Matilde</div>
+            </div>
+            <div class="pill">1 e 2 dorms</div>
+          </div>
+          <div class="price">A partir de <strong>R$ 225.000</strong> • Entrada <strong>R$ 5.000</strong></div>
+          <div class="benefits">
+            <span>Subsídio MCMV</span><span>Use FGTS</span><span>Localização estratégica</span>
+          </div>
+          <div class="cta">
+            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Mood Vila Matilde. Podemos falar?">
+              <span class="whatsapp-icon"></span> WhatsApp
+            </a>
+            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+          </div>
+          <div class="small">Valores promocionais para captação de leads.</div>
+        </div>
+      </article>
+
+      <!-- Aura Guilhermina -->
+      <article class="card" data-bairro="Guilhermina" data-price="386000">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop" alt="Aura Guilhermina - fachada" />
+          <div class="badge">Médio padrão • Próx. Metrô Guilhermina</div>
+        </div>
+        <div class="card-body">
+          <div class="title-row">
+            <div>
+              <div class="card-title">Aura Guilhermina</div>
+              <div class="loc">Guilhermina • Próx. Metrô Guilhermina-Esperança</div>
+            </div>
+            <div class="pill">2 dorms</div>
+          </div>
+          <div class="price">A partir de <strong>R$ 386.000</strong> • Entrada <strong>R$ 10.000</strong></div>
+          <div class="benefits">
+            <span>Lazer completo</span><span>Acabamento superior</span><span>Opções com vaga</span>
+          </div>
+          <div class="cta">
+            <a class="btn" target="_blank" rel="noopener" href="#" data-msg="Olá! Tenho interesse no Aura Guilhermina. Podemos falar?">
+              <span class="whatsapp-icon"></span> WhatsApp
+            </a>
+            <a class="btn ghost" href="#" target="_blank">Ver tour/plantas</a>
+          </div>
+          <div class="small">Disponibilidade por torre e tipologia.</div>
+        </div>
+      </article>
+
     </div>
-  </section>
+  </main>
 
   <footer>
-    <div class="container footer-inner">
-      <div class="creci">Consultor Chaves — CRECI 313454-F</div>
-      <div class="muted">Atendimento Zona Leste de São Paulo • Seg–Sáb 9h–19h</div>
-      <div><a href="#" id="footerWhats" class="btn btn-outline" target="_blank" rel="noopener">WhatsApp</a></div>
-    </div>
+    Atendimento via WhatsApp. Resposta rápida. Informe seu interesse e agende uma visita.
+    <br/>Consultor: Chaves • CRECI 313454-F • São Paulo - SP
   </footer>
 
-  <a class="float-wa" id="floatWhats" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    <span>Falar no WhatsApp</span>
-  </a>
-
-  <span class="sr-only" id="utmSource">lp</span>
-
   <script>
-    // Número do Consultor Chaves
-    const PHONE = '5511913595391'; // 55 + 11 + 913595391
-    const BASE_MSG = 'Olá! Vi a landing de apartamentos na Zona Leste e quero mais detalhes. Meu interesse: {tag}. Bairro: {bairro}.';
+    // Número do WhatsApp no formato 55DDDNUMERO
+    const WHATSAPP_NUMBER = '5511913595391';
+    const DEFAULT_MSG = encodeURIComponent('Olá! Vim da página de imóveis da Zona Leste e quero saber mais.');
 
-    function waUrl(tag='geral', origem='default', extra='') {
-      const text = encodeURIComponent(BASE_MSG
-        .replace('{tag}', tag)
-        .replace('{bairro}', '{informar}'));
-      const utm = `utm_source=${encodeURIComponent(origem)}&utm_medium=whatsapp&utm_campaign=zona_leste`;
-      const qs = extra ? `${utm}&${extra}` : utm;
-      return `https://wa.me/${PHONE}?text=${text}&${qs}`;
+    function makeWhatsUrl(msg){
+      const text = encodeURIComponent(msg || DEFAULT_MSG);
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
     }
 
-    document.getElementById('btnTopWhats').href  = waUrl('topo','top_nav');
-    document.getElementById('btnHeroWhats').href = waUrl('hero','hero_cta');
-    document.getElementById('footerWhats').href  = waUrl('footer','footer_cta');
-    document.getElementById('floatWhats').href   = waUrl('flutuante','float_cta');
+    // Aplica links WhatsApp
+    const heroEl = document.getElementById('whats-hero');
+    if(heroEl){ heroEl.href = makeWhatsUrl('Olá! Quero ajuda para encontrar meu apê na Zona Leste.'); }
 
-    // Carrossel
-    document.querySelectorAll('.carousel').forEach(carousel => {
-      const imgs = carousel.querySelectorAll('img');
-      let idx = 0;
-      const show = (i) => imgs.forEach((im, k) => im.classList.toggle('active', k===i));
-      carousel.querySelector('.prev').addEventListener('click', () => {
-        idx = (idx - 1 + imgs.length) % imgs.length; show(idx);
-      });
-      carousel.querySelector('.next').addEventListener('click', () => {
-        idx = (idx + 1) % imgs.length; show(idx);
-      });
+    document.querySelectorAll('.card .btn').forEach(btn=>{
+      const msg = btn.getAttribute('data-msg');
+      if(msg) btn.href = makeWhatsUrl(msg);
     });
 
-    // Filtros
-    const chips = document.querySelectorAll('#filterChips .chip');
-    const cards = document.querySelectorAll('#cardsGrid .card');
+    // Filtro por bairro (chips) e por preço (select)
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('.card');
+    const priceSel = document.getElementById('priceSelect');
+
+    let activeBairro = 'todos';
+
     chips.forEach(chip=>{
       chip.addEventListener('click', ()=>{
         chips.forEach(c=>c.classList.remove('active'));
         chip.classList.add('active');
-        const f = chip.dataset.filter;
-        cards.forEach(card=>{
-          if (f==='all') { card.style.display='flex'; return; }
-          const cls = (card.getAttribute('data-seg')||'').split(/\s+/);
-          card.style.display = cls.includes(f) ? 'flex' : 'none';
-        });
-        document.getElementById('empreendimentos').scrollIntoView({behavior:'smooth', block:'start'});
+        activeBairro = chip.dataset.bairro || 'todos';
+        applyFilters();
+        const list = document.getElementById('lista');
+        if(list) list.scrollIntoView({behavior:'smooth', block:'start'});
       });
     });
 
-    // CTAs por card
-    document.querySelectorAll('[data-wa]').forEach(btn=>{
-      const tag = btn.dataset.wa || 'card';
-      const origem = `card_${tag}`;
-      btn.href = waUrl(tag, origem);
-    });
+    priceSel.addEventListener('change', applyFilters);
 
-    // Form -> abre WhatsApp com dados
-    function handleForm(e){
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const nome = (fd.get('nome')||'').trim();
-      const whats = (fd.get('whats')||'').trim();
-      const interesse = fd.get('interesse') || 'geral';
-      const bairro = (fd.get('bairro')||'').trim() || '{informar}';
-      const msg = `Olá! Meu nome é ${nome}. Prefiro contato no WhatsApp ${whats}. Interesse: ${interesse}. Bairro: ${bairro}.`;
-      const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}&utm_source=form&utm_medium=whatsapp&utm_campaign=zona_leste`;
-      window.open(url, '_blank', 'noopener');
-      return false;
+    function inPriceRange(price, range){
+      if(range==='todas') return true;
+      if(range==='0-250') return price <= 250000;
+      if(range==='250-350') return price > 250000 && price <= 350000;
+      if(range==='350-500') return price > 350000 && price <= 500000;
+      if(range==='500-inf') return price > 500000;
+      return true;
     }
-    window.handleForm = handleForm;
+
+    function applyFilters(){
+      const r = priceSel.value || 'todas';
+      cards.forEach(card=>{
+        const bairro = card.dataset.bairro || '';
+        const price = parseInt(card.dataset.price || '0',10);
+        const okBairro = (activeBairro==='todos') || (bairro===activeBairro);
+        const okPrice = inPriceRange(price, r);
+        card.style.display = (okBairro && okPrice) ? '' : 'none';
+      });
+    }
+
+    applyFilters();
   </script>
 </body>
 </html>
