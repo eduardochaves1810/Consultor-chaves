@@ -1,146 +1,484 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page - Horizon Vila Matilde</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apartamentos na Zona Leste de SP | MCMV • Médio • Alto Padrão</title>
+  <meta name="description" content="Apartamentos na Zona Leste de SP — Minha Casa Minha Vida, médio e alto padrão. Use FGTS, simule financiamento e fale com o Consultor Chaves no WhatsApp. Tatuapé, Mooca, Anália Franco, Itaquera e mais." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; padding: 40px; }
-    pre {
-      background: #1e1e1e;
-      color: #dcdcdc;
-      padding: 20px;
-      border-radius: 10px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      position: relative;
+    :root {
+      --bg: #ffffff;
+      --text: #222;
+      --muted: #666;
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --accent: #16a34a;
+      --border: #e5e7eb;
+      --card: #f8fafc;
+      --whatsapp: #25D366;
+      --danger: #ef4444;
+      --price: #0b7a0b;
     }
-    button {
-      background: #1e8b4d;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.9); backdrop-filter: saturate(180%) blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0;
+    }
+    .brand { font-weight: 700; }
+    .brand small { color: var(--muted); font-weight: 600; display:block; font-size:12px; }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 14px; border-radius: 10px; font-weight: 700; border: 1px solid transparent;
+      transition: transform .05s ease, background .2s ease, border-color .2s ease;
       cursor: pointer;
-      font-size: 1em;
-      margin-bottom: 15px;
     }
-    button:hover { background: #0a5c2f; }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { border-color: var(--border); background: #fff; color: var(--text); }
+    .btn-outline:hover { border-color: var(--primary); }
+
+    .hero {
+      padding: 28px 0 8px;
+      background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 70%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 { font-size: 28px; line-height: 1.2; margin: 8px 0 6px; }
+    .hero p.sub { color: var(--muted); margin: 0 0 14px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
+    .badge {
+      background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+      padding: 6px 10px; font-size: 13px; color: #111;
+    }
+
+    .filters {
+      padding: 10px 0 18px; position: sticky; top: 56px; z-index: 40;
+      background: #fff; border-bottom: 1px solid var(--border);
+    }
+    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 14px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border);
+      background: #fff; cursor: pointer; color: #111;
+    }
+    .chip.active { background: #ebf8ff; border-color: #bae6fd; color: #0c4a6e; }
+
+    .section { padding: 24px 0; }
+    .section h2 { font-size: 22px; margin: 0 0 12px; }
+    .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media(min-width: 700px){ .cards { grid-template-columns: 1fr 1fr; } }
+    @media(min-width: 1024px){ .cards { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .card {
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff;
+      display: flex; flex-direction: column;
+    }
+    .carousel { position: relative; aspect-ratio: 16/10; background: #f1f5f9; }
+    .carousel img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .carousel img.active { display: block; }
+    .carousel .nav {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6px;
+    }
+    .carousel .nav button {
+      background: rgba(0,0,0,0.45); color:#fff; border: 0;
+      width: 34px; height: 34px; border-radius: 999px; cursor: pointer;
+    }
+    .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .badge-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 12px; background: #f1f5f9; color: #0f172a; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border); }
+    .pill { font-size: 12px; background: #ecfdf5; color: #065f46; padding: 4px 8px; border-radius: 999px; border: 1px solid #d1fae5; }
+    .price { font-weight: 700; color: var(--price); }
+    .bullets { margin: 0; padding-left: 18px; color: #0b172a; }
+    .cta-row { display: flex; gap: 8px; margin-top: auto; }
+    .btn-wa { background: var(--whatsapp); color: #fff; border: 0; }
+    .btn-wa:hover { filter: brightness(0.95); }
+
+    .muted { color: var(--muted); }
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media(min-width: 900px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .card-box { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+    details { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: #fff; }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; }
+    form .row { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media(min-width: 700px){ form .row { grid-template-columns: 1fr 1fr; } }
+    label { font-size: 14px; color: #111; }
+    input, select, textarea {
+      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); font-size: 14px;
+    }
+    .hint { font-size: 12px; color: var(--muted); }
+
+    footer { margin-top: 16px; border-top: 1px solid var(--border); background: #fff; }
+    .footer-inner { padding: 14px 0; display: grid; gap: 10px; }
+    .creci { color: var(--muted); font-size: 14px; }
+    .float-wa {
+      position: fixed; right: 14px; bottom: 14px; z-index: 60;
+      display: flex; align-items: center; gap: 8px;
+      background: var(--whatsapp); color: #fff; padding: 10px 12px; border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+    }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .ribbon {
+      position: absolute; top: 10px; left: -8px; background: #0ea5e9; color:#fff; padding: 6px 10px; font-weight:700;
+      clip-path: polygon(0 0, 100% 0, 88% 100%, 0% 100%);
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Landing Page - Horizon Vila Matilde</h1>
-  <p>Clique no botão abaixo para copiar o código completo da landing page:</p>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        Zona Leste Imóveis
+        <small>Consultor Chaves • CRECI 313454-F</small>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="#empreendimentos">Empreendimentos</a>
+        <a class="btn btn-primary" id="btnTopWhats" target="_blank" rel="noopener">
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
 
-  <button onclick="copiarCodigo()">📋 Copiar Código</button>
+  <section class="hero">
+    <div class="container">
+      <h1>Apartamentos na Zona Leste — opções a partir de R$ 239.000</h1>
+      <p class="sub">1, 2 e 3 dormitórios • MCMV, médio e alto padrão • Use FGTS • Atendimento imediato no WhatsApp.</p>
+      <div class="badges">
+        <span class="badge">Perto do metrô</span>
+        <span class="badge">Condomínio clube</span>
+        <span class="badge">Minha Casa Minha Vida</span>
+        <span class="badge">Entrada facilitada</span>
+        <span class="badge">Tour do decorado</span>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-primary" id="btnHeroWhats" target="_blank" rel="noopener">Falar no WhatsApp agora</a>
+        <a class="btn btn-outline" href="#form-contato">Prefere que eu te chame?</a>
+      </div>
+    </div>
+  </section>
 
-  <pre id="codigo">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="pt-BR"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;meta name="description" content="Horizon Vila Matilde - Empreendimento da SWA Realty. Apartamentos modernos na Zona Leste de São Paulo, próximos à futura Estação Aricanduva."&gt;
-  &lt;title&gt;Horizon Vila Matilde | SWA Realty&lt;/title&gt;
-  &lt;style&gt;
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; color: #333; background-color: #fff; }
-    header {
-      background: linear-gradient(135deg, #0a5c2f, #1e8b4d);
-      color: white; text-align: center; padding: 60px 20px;
-    }
-    header h1 { font-size: 2.5em; margin-bottom: 10px; }
-    header p { font-size: 1.2em; }
-    section { padding: 60px 20px; max-width: 1100px; margin: auto; }
-    h2 { color: #0a5c2f; margin-bottom: 20px; text-align: center; }
-    p { line-height: 1.6; margin-bottom: 15px; text-align: center; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .card {
-      background: #f9f9f9;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .cta { text-align: center; margin: 50px 0; }
-    .cta a {
-      background: #1e8b4d;
-      color: white;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: background 0.3s;
-    }
-    .cta a:hover { background: #0a5c2f; }
-    footer {
-      background: #0a5c2f;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 0.9em;
-    }
-    img { width: 100%; border-radius: 10px; }
-    @media (max-width: 768px) {
-      header h1 { font-size: 2em; }
-      .cta a { font-size: 1em; padding: 12px 25px; }
-    }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
+  <div class="filters">
+    <div class="container">
+      <div class="filter-group" id="filterChips">
+        <button class="chip active" data-filter="all">Todos</button>
+        <button class="chip" data-filter="mcmv">Minha Casa Minha Vida</button>
+        <button class="chip" data-filter="mid">Médio Padrão</button>
+        <button class="chip" data-filter="high">Alto Padrão</button>
+        <button class="chip" data-filter="perto-metro">Perto do metrô</button>
+        <button class="chip" data-filter="pronto">Pronto para morar</button>
+        <button class="chip" data-filter="em-obras">Em obras/Lanç.</button>
+        <button class="chip" data-filter="varanda">Com varanda</button>
+      </div>
+    </div>
+  </div>
 
-  &lt;header&gt;
-    &lt;h1&gt;Horizon Vila Matilde&lt;/h1&gt;
-    &lt;p&gt;Abra suas janelas para novos horizontes na Zona Leste de São Paulo&lt;/p&gt;
-  &lt;/header&gt;
+  <section class="section" id="empreendimentos">
+    <div class="container">
+      <h2>Empreendimentos em destaque</h2>
+      <div class="cards" id="cardsGrid">
 
-  &lt;section id="localizacao"&gt;
-    &lt;h2&gt;Localização Privilegiada&lt;/h2&gt;
-    &lt;p&gt;Rua General Sousa Neto, 765 - Vila Aricanduva, São Paulo - SP&lt;/p&gt;
-    &lt;p&gt;A poucos minutos da Av. Aricanduva, Radial Leste e da futura Estação Aricanduva (Linha Verde). Próximo a escolas, hospitais, supermercados e shoppings.&lt;/p&gt;
-  &lt;/section&gt;
+        <!-- CARD MAIS BARATO (MCMV) -->
+        <article class="card" data-seg="mcmv perto-metro em-obras varanda">
+          <div class="carousel" data-index="0">
+            <span class="ribbon">A partir de R$ 239.000</span>
+            <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c52f?q=80&w=1200&auto=format&fit=crop" alt="Fachada MCMV" class="active">
+            <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop" alt="Lazer MCMV">
+            <img src="https://images.unsplash.com/photo-1501045661006-fcebe0257c3f0?q=80&w=1200&auto=format&fit=crop" alt="Planta 2 dorms MCMV">
+            <div class="nav">
+              <button class="prev" aria-label="Imagem anterior">‹</button>
+              <button class="next" aria-label="Próxima imagem">›</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="badge-row">
+              <span class="tag">Lançamento</span>
+              <span class="pill">MCMV</span>
+              <span class="tag">600 m do Metrô</span>
+            </div>
+            <h3 style="margin:6px 0 0;">Residencial LesteViva — Itaquera</h3>
+            <p class="muted" style="margin:0;">2 dorms (1 suíte) • 43 a 55 m² • Varanda • 1 vaga</p>
+            <p class="price">A partir de R$ 239.000</p>
+            <ul class="bullets">
+              <li>Use FGTS + condições facilitadas</li>
+              <li>Condomínio clube com lazer completo</li>
+              <li>Perto de mercados, escolas e terminal</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn btn-wa" target="_blank" rel="noopener"
+                 href="#" data-wa="mcmv_lesviv_itaquera">
+                Ver opções no WhatsApp
+              </a>
+              <a class="btn btn-outline" href="#form-contato">Receber book</a>
+            </div>
+          </div>
+        </article>
 
-  &lt;section id="diferenciais"&gt;
-    &lt;h2&gt;Diferenciais do Empreendimento&lt;/h2&gt;
-    &lt;div class="grid"&gt;
-      &lt;div class="card"&gt;&lt;h3&gt;Infraestrutura Completa&lt;/h3&gt;&lt;p&gt;Espaços de lazer, coworking, academia, piscina, salão de festas e muito mais.&lt;/p&gt;&lt;/div&gt;
-      &lt;div class="card"&gt;&lt;h3&gt;Segurança 24h&lt;/h3&gt;&lt;p&gt;Portaria com clausura, vidro antivandalismo e monitoramento constante.&lt;/p&gt;&lt;/div&gt;
-      &lt;div class="card"&gt;&lt;h3&gt;Sustentabilidade&lt;/h3&gt;&lt;p&gt;Horta vertical, bicicletário e previsão para recarga de carros elétricos.&lt;/p&gt;&lt;/div&gt;
-      &lt;div class="card"&gt;&lt;h3&gt;Conforto e Tecnologia&lt;/h3&gt;&lt;p&gt;Infraestrutura para ar-condicionado, persianas integradas e medição individualizada.&lt;/p&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
+        <!-- MÉDIO PADRÃO -->
+        <article class="card" data-seg="mid pronto varanda perto-metro">
+          <div class="carousel" data-index="0">
+            <span class="ribbon">A partir de R$ 489.000</span>
+            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop" alt="Sala e varanda">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&auto=format&fit=crop" alt="Cozinha planejada" class="active">
+            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200&auto=format&fit=crop" alt="Área comum">
+            <div class="nav">
+              <button class="prev" aria-label="Imagem anterior">‹</button>
+              <button class="next" aria-label="Próxima imagem">›</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="badge-row">
+              <span class="tag">Pronto para morar</span>
+              <span class="pill">Médio Padrão</span>
+              <span class="tag">900 m do Metrô</span>
+            </div>
+            <h3 style="margin:6px 0 0;">Parque Tatuapé Home — Tatuapé</h3>
+            <p class="muted" style="margin:0;">2 e 3 dorms • 55 a 78 m² • Varanda gourmet • 1–2 vagas</p>
+            <p class="price">A partir de R$ 489.000</p>
+            <ul class="bullets">
+              <li>Área de lazer completa e coworking</li>
+              <li>Região com shoppings e serviços</li>
+              <li>Financiamento facilitado</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn btn-wa" target="_blank" rel="noopener"
+                 href="#" data-wa="mid_pt_home_tatuape">
+                Falar sobre este imóvel
+              </a>
+              <a class="btn btn-outline" href="#form-contato">Agendar visita</a>
+            </div>
+          </div>
+        </article>
 
-  &lt;div class="cta"&gt;
-    &lt;h2&gt;Agende sua visita com o Consultor Chaves&lt;/h2&gt;
-    &lt;p&gt;Fale agora pelo WhatsApp e descubra as condições exclusivas de lançamento!&lt;/p&gt;
-    &lt;a href="https://wa.me/5511913595391?text=Olá%20Consultor%20Chaves!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Horizon%20Vila%20Matilde." target="_blank"&gt;💬 Falar no WhatsApp&lt;/a&gt;
-  &lt;/div&gt;
+        <!-- ALTO PADRÃO -->
+        <article class="card" data-seg="high pronto varanda">
+          <div class="carousel" data-index="0">
+            <span class="ribbon">A partir de R$ 1.690.000</span>
+            <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200&auto=format&fit=crop" alt="Fachada alto padrão" class="active">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Área gourmet">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Suíte master">
+            <div class="nav">
+              <button class="prev" aria-label="Imagem anterior">‹</button>
+              <button class="next" aria-label="Próxima imagem">›</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="badge-row">
+              <span class="tag">Pronto para morar</span>
+              <span class="pill">Alto Padrão</span>
+              <span class="tag">Anália Franco</span>
+            </div>
+            <h3 style="margin:6px 0 0;">Signature Anália — Anália Franco</h3>
+            <p class="muted" style="margin:0;">3 e 4 suítes • 135 a 220 m² • Varanda ampla • 3 vagas</p>
+            <p class="price">A partir de R$ 1.690.000</p>
+            <ul class="bullets">
+              <li>Acabamentos premium e hall privativo</li>
+              <li>Lazer adulto/infantil e segurança 24h</li>
+              <li>Perto do Shopping Anália Franco</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn btn-wa" target="_blank" rel="noopener"
+                 href="#" data-wa="high_signature_analia">
+                Quero condições no WhatsApp
+              </a>
+              <a class="btn btn-outline" href="#form-contato">Receber book completo</a>
+            </div>
+          </div>
+        </article>
 
-  &lt;footer&gt;
-    &lt;p&gt;© 2024 SWA Realty | Horizon Vila Matilde - Rua General Sousa Neto, 765 - Vila Aricanduva, São Paulo - SP&lt;/p&gt;
-    &lt;p&gt;CRECI/SP Nº 043336-J | Empreendimento sob registro no 16º Oficial de Registro de Imóveis de São Paulo&lt;/p&gt;
-  &lt;/footer&gt;
+        <!-- Duplicar articles para mais empreendimentos, atualizando preços "A partir de R$ ..." com valores reais -->
 
-&lt;/body&gt;
-&lt;/html&gt;
-  </pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid-2">
+      <div class="card-box">
+        <h3>Por que a Zona Leste?</h3>
+        <p class="muted">Mobilidade por metrô, Radial Leste e Aricanduva, polos de comércio e serviços (Tatuapé, Mooca, Anália Franco), escolas e hospitais — opções do MCMV ao alto padrão.</p>
+        <ul class="bullets">
+          <li>Perto do metrô e corredores de ônibus</li>
+          <li>Condomínios com lazer completo</li>
+          <li>Empreendimentos prontos e em obras</li>
+          <li>Uso de FGTS e entrada facilitada</li>
+        </ul>
+      </div>
+      <div class="card-box">
+        <h3>Resultados e confiança</h3>
+        <p class="muted">+120 famílias atendidas na Zona Leste • Atendimento consultivo e suporte na aprovação de crédito.</p>
+        <div class="badge-row">
+          <span class="pill">Atendimento imediato</span>
+          <span class="pill">Tour do decorado</span>
+          <span class="pill">Simulação em minutos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Dúvidas frequentes</h2>
+      <details open>
+        <summary>Posso usar FGTS e Minha Casa Minha Vida?</summary>
+        <p>Sim. Avaliamos sua faixa e simulamos condições pelo WhatsApp em poucos minutos.</p>
+      </details>
+      <details>
+        <summary>Financia 100%? E se meu score for baixo?</summary>
+        <p>Depende da análise. Fazemos pré-avaliação e indicamos caminhos para aprovação.</p>
+      </details>
+      <details>
+        <summary>Dá para agendar visita ao decorado?</summary>
+        <p>Sim! Clique em “Falar no WhatsApp” e combinamos seu melhor horário.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="section" id="form-contato">
+    <div class="container card-box">
+      <h2>Prefere que eu te chame no WhatsApp?</h2>
+      <p class="muted">Preencha e retorno em minutos.</p>
+      <form id="leadForm" onsubmit="return handleForm(event)">
+        <div class="row">
+          <div>
+            <label>Nome
+              <input type="text" name="nome" required placeholder="Seu nome" />
+            </label>
+          </div>
+          <div>
+            <label>WhatsApp
+              <input type="tel" name="whats" required placeholder="(11) 9 9999-9999" />
+            </label>
+          </div>
+          <div>
+            <label>Interesse
+              <select name="interesse" required>
+                <option value="">Selecione…</option>
+                <option value="mcmv">Minha Casa Minha Vida</option>
+                <option value="mid">Médio Padrão</option>
+                <option value="high">Alto Padrão</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label>Bairro de interesse
+              <input type="text" name="bairro" placeholder="Tatuapé, Mooca, Itaquera, ..." />
+            </label>
+          </div>
+        </div>
+        <p class="hint">
+          <input type="checkbox" id="lgpd" required />
+          <label for="lgpd">Autorizo contato via WhatsApp.</label>
+        </p>
+        <button class="btn btn-primary" type="submit">Enviar e falar no WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="creci">Consultor Chaves — CRECI 313454-F</div>
+      <div class="muted">Atendimento Zona Leste de São Paulo • Seg–Sáb 9h–19h</div>
+      <div><a href="#" id="footerWhats" class="btn btn-outline" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+  </footer>
+
+  <a class="float-wa" id="floatWhats" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <span>Falar no WhatsApp</span>
+  </a>
+
+  <span class="sr-only" id="utmSource">lp</span>
 
   <script>
-    function copiarCodigo() {
-      const codigo = document.getElementById("codigo").innerText;
-      navigator.clipboard.writeText(codigo).then(() => {
-        alert("Código copiado com sucesso!");
-      });
-    }
-  </script>
+    // Número do Consultor Chaves
+    const PHONE = '5511913595391'; // 55 + 11 + 913595391
+    const BASE_MSG = 'Olá! Vi a landing de apartamentos na Zona Leste e quero mais detalhes. Meu interesse: {tag}. Bairro: {bairro}.';
 
+    function waUrl(tag='geral', origem='default', extra='') {
+      const text = encodeURIComponent(BASE_MSG
+        .replace('{tag}', tag)
+        .replace('{bairro}', '{informar}'));
+      const utm = `utm_source=${encodeURIComponent(origem)}&utm_medium=whatsapp&utm_campaign=zona_leste`;
+      const qs = extra ? `${utm}&${extra}` : utm;
+      return `https://wa.me/${PHONE}?text=${text}&${qs}`;
+    }
+
+    document.getElementById('btnTopWhats').href  = waUrl('topo','top_nav');
+    document.getElementById('btnHeroWhats').href = waUrl('hero','hero_cta');
+    document.getElementById('footerWhats').href  = waUrl('footer','footer_cta');
+    document.getElementById('floatWhats').href   = waUrl('flutuante','float_cta');
+
+    // Carrossel
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      const imgs = carousel.querySelectorAll('img');
+      let idx = 0;
+      const show = (i) => imgs.forEach((im, k) => im.classList.toggle('active', k===i));
+      carousel.querySelector('.prev').addEventListener('click', () => {
+        idx = (idx - 1 + imgs.length) % imgs.length; show(idx);
+      });
+      carousel.querySelector('.next').addEventListener('click', () => {
+        idx = (idx + 1) % imgs.length; show(idx);
+      });
+    });
+
+    // Filtros
+    const chips = document.querySelectorAll('#filterChips .chip');
+    const cards = document.querySelectorAll('#cardsGrid .card');
+    chips.forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        const f = chip.dataset.filter;
+        cards.forEach(card=>{
+          if (f==='all') { card.style.display='flex'; return; }
+          const cls = (card.getAttribute('data-seg')||'').split(/\s+/);
+          card.style.display = cls.includes(f) ? 'flex' : 'none';
+        });
+        document.getElementById('empreendimentos').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // CTAs por card
+    document.querySelectorAll('[data-wa]').forEach(btn=>{
+      const tag = btn.dataset.wa || 'card';
+      const origem = `card_${tag}`;
+      btn.href = waUrl(tag, origem);
+    });
+
+    // Form -> abre WhatsApp com dados
+    function handleForm(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const nome = (fd.get('nome')||'').trim();
+      const whats = (fd.get('whats')||'').trim();
+      const interesse = fd.get('interesse') || 'geral';
+      const bairro = (fd.get('bairro')||'').trim() || '{informar}';
+      const msg = `Olá! Meu nome é ${nome}. Prefiro contato no WhatsApp ${whats}. Interesse: ${interesse}. Bairro: ${bairro}.`;
+      const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}&utm_source=form&utm_medium=whatsapp&utm_campaign=zona_leste`;
+      window.open(url, '_blank', 'noopener');
+      return false;
+    }
+    window.handleForm = handleForm;
+  </script>
 </body>
 </html>
